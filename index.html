@@ -116,14 +116,11 @@
     .artwork-placeholder {
       width: 100%;
       height: 500px;
-      background: linear-gradient(135deg, #e8dcc6, #d4c5a9);
       border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
-      color: #8b7355;
-      font-style: italic;
+      overflow: hidden;
     }
 
     .artwork-title {
@@ -318,18 +315,10 @@
     .detail-image-placeholder {
       width: 100%;
       height: 200px;
-      background: linear-gradient(135deg, #e8dcc6, #d4c5a9);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1rem;
-      color: #8b7355;
-      font-style: italic;
-      transition: background 0.3s ease;
-    }
-
-    .detail-image-container:hover .detail-image-placeholder {
-      background: linear-gradient(135deg, #d4c5a9, #c4b599);
+      overflow: hidden;
     }
 
     .scroll-indicator {
@@ -393,7 +382,7 @@
   <section id="artwork" class="section artwork-showcase">
     <div class="artwork-frame">
       <div class="artwork-placeholder">
-        <img src="https://drive.google.com/uc?export=view&id=1xD5qLYudrr5uMSlCOt3zjUGwnBU04OWM" alt="La Piedad by Eduardo Jiménez Aguirre" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+        <img src="https://i.ibb.co/wFr3cYb7/piedad.jpg" alt="La Piedad by Eduardo Jiménez Aguirre" style="width:100%; height:100%; object-fit:contain;">
       </div>
     </div>
     <h2 class="artwork-title">A Contemporary Sacred Vision</h2>
@@ -407,17 +396,17 @@
     <div class="detail-images">
       <div class="detail-image-container">
         <div class="detail-image-placeholder">
-          <img src="https://drive.google.com/uc?export=view&id=15r6ffY3OFiJIjMChriCyjcH_7Z4VnXpx" alt="Detail View 1" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+          <img src="https://i.ibb.co/prs3ssJ3/detail1.jpg" alt="Detail View 1 - Technique" style="width:100%; height:100%; object-fit:cover;">
         </div>
       </div>
       <div class="detail-image-container">
         <div class="detail-image-placeholder">
-          Detail View 2
+          <img src="https://i.ibb.co/j9P05npy/detail2.jpg" alt="Detail View 2 - Composition" style="width:100%; height:100%; object-fit:cover;">
         </div>
       </div>
       <div class="detail-image-container">
         <div class="detail-image-placeholder">
-          Detail View 3
+          <img src="https://i.ibb.co/67VzF9Rw/detail3.jpg" alt="Detail View 3 - Colors" style="width:100%; height:100%; object-fit:cover;">
         </div>
       </div>
     </div>
