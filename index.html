@@ -121,6 +121,12 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .artwork-placeholder:hover {
+      transform: scale(1.02);
     }
 
     .artwork-title {
@@ -182,6 +188,16 @@
       color: #2c2c2c;
     }
 
+    /* Style spécial pour le prix */
+    .price-highlight {
+      background: linear-gradient(135deg, #d4af37, #f4e4a1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
+      font-size: 1.1em;
+    }
+
     .artist-section {
       text-align: center;
     }
@@ -217,6 +233,80 @@
       margin: 0 auto;
       font-size: 1.1rem;
       line-height: 1.8;
+    }
+
+    .investment-section {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: white;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .investment-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 30% 40%, rgba(212, 175, 55, 0.1), transparent 50%);
+    }
+
+    .investment-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .investment-section h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      margin-bottom: 30px;
+      color: #d4af37;
+    }
+
+    .price-display {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      color: #d4af37;
+      margin: 40px 0;
+      text-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+      letter-spacing: 2px;
+    }
+
+    .investment-description {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      opacity: 0.9;
+      margin-bottom: 40px;
+    }
+
+    .value-proposition {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .value-item {
+      background: rgba(255,255,255,0.05);
+      padding: 30px 20px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    .value-item h4 {
+      color: #d4af37;
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+    }
+
+    .value-item p {
+      font-size: 1rem;
+      line-height: 1.6;
+      opacity: 0.8;
     }
 
     .contact-section {
@@ -305,6 +395,7 @@
       border-radius: 12px;
       box-shadow: 0 8px 25px rgba(0,0,0,0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
     }
 
     .detail-image-container:hover {
@@ -343,6 +434,48 @@
       }
     }
 
+    /* Lightbox pour les images */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 40px;
+      cursor: pointer;
+    }
+
+    /* Certificat d'authenticité */
+    .authenticity-badge {
+      display: inline-block;
+      background: linear-gradient(45deg, #d4af37, #f4e4a1);
+      color: #2c2c2c;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-top: 20px;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    }
+
     @media (max-width: 768px) {
       .details-container {
         grid-template-columns: 1fr;
@@ -361,6 +494,15 @@
 
       .detail-image-placeholder {
         height: 180px;
+      }
+
+      .value-proposition {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .price-display {
+        font-size: 2.5rem;
       }
     }
   </style>
@@ -381,8 +523,8 @@
 
   <section id="artwork" class="section artwork-showcase">
     <div class="artwork-frame">
-      <div class="artwork-placeholder">
-        <img src="https://i.ibb.co/wFr3cYb7/piedad.jpg" alt="La Piedad by Eduardo Jiménez Aguirre" style="width:100%; height:100%; object-fit:contain;">
+      <div class="artwork-placeholder" onclick="openLightbox('main-artwork')">
+        <img id="main-artwork" src="https://i.ibb.co/wFr3cYb7/piedad.jpg" alt="La Piedad by Eduardo Jiménez Aguirre" style="width:100%; height:100%; object-fit:contain;">
       </div>
     </div>
     <h2 class="artwork-title">A Contemporary Sacred Vision</h2>
@@ -392,21 +534,24 @@
       brushwork, Eduardo Jiménez Aguirre brings new life to this sacred moment between the Virgin Mary and Christ, 
       bridging centuries of artistic tradition with contemporary vision.
     </p>
+    <div class="authenticity-badge">
+      ✓ Certificate of Authenticity Included
+    </div>
 
     <div class="detail-images">
-      <div class="detail-image-container">
+      <div class="detail-image-container" onclick="openLightbox('detail1')">
         <div class="detail-image-placeholder">
-          <img src="https://i.ibb.co/prs3ssJ3/detail1.jpg" alt="Detail View 1 - Technique" style="width:100%; height:100%; object-fit:cover;">
+          <img id="detail1" src="https://i.ibb.co/prs3ssJ3/detail1.jpg" alt="Detail View 1 - Technique" style="width:100%; height:100%; object-fit:cover;">
         </div>
       </div>
-      <div class="detail-image-container">
+      <div class="detail-image-container" onclick="openLightbox('detail2')">
         <div class="detail-image-placeholder">
-          <img src="https://i.ibb.co/j9P05npy/detail2.jpg" alt="Detail View 2 - Composition" style="width:100%; height:100%; object-fit:cover;">
+          <img id="detail2" src="https://i.ibb.co/j9P05npy/detail2.jpg" alt="Detail View 2 - Composition" style="width:100%; height:100%; object-fit:cover;">
         </div>
       </div>
-      <div class="detail-image-container">
+      <div class="detail-image-container" onclick="openLightbox('detail3')">
         <div class="detail-image-placeholder">
-          <img src="https://i.ibb.co/67VzF9Rw/detail3.jpg" alt="Detail View 3 - Colors" style="width:100%; height:100%; object-fit:cover;">
+          <img id="detail3" src="https://i.ibb.co/67VzF9Rw/detail3.jpg" alt="Detail View 3 - Colors" style="width:100%; height:100%; object-fit:cover;">
         </div>
       </div>
     </div>
@@ -434,7 +579,11 @@
         </div>
         <div class="detail-item">
           <span class="detail-label">Dimensions:</span>
-          <span class="detail-value">100cm × 100cm</span>
+          <span class="detail-value">100cm × 100cm (39.4" × 39.4")</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Investment:</span>
+          <span class="detail-value price-highlight">USD $5,900</span>
         </div>
         <div class="detail-item">
           <span class="detail-label">Status:</span>
@@ -471,33 +620,73 @@
     </div>
   </section>
 
+  <section class="section investment-section">
+    <div class="investment-content">
+      <h2>Art Investment Opportunity</h2>
+      <div class="price-display">USD $5,900</div>
+      <div class="investment-description">
+        <p>This original work represents a unique opportunity to acquire a contemporary interpretation of one of art history's most profound themes. Created by an emerging artist with exceptional technical skill and spiritual vision.</p>
+      </div>
+      
+      <div class="value-proposition">
+        <div class="value-item">
+          <h4>🎨 Original Artwork</h4>
+          <p>One-of-a-kind acrylic painting, never to be reproduced</p>
+        </div>
+        <div class="value-item">
+          <h4>📜 Certificate Included</h4>
+          <p>Official certificate of authenticity with provenance documentation</p>
+        </div>
+        <div class="value-item">
+          <h4>🚚 Secure Shipping</h4>
+          <p>Professional packaging and insured worldwide delivery</p>
+        </div>
+        <div class="value-item">
+          <h4>💎 Investment Potential</h4>
+          <p>Emerging artist with growing recognition in contemporary sacred art</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section contact-section">
-    <h2>Available for Acquisition</h2>
+    <h2>Acquire This Masterpiece</h2>
     <p style="font-size: 1.2rem; color: #666; margin-bottom: 20px;">
-      This original work is currently seeking its forever home with discerning collectors of contemporary sacred art.
+      Begin your collection of contemporary sacred art with this powerful and moving work.
     </p>
 
     <div class="contact-form">
-      <form>
+      <form onsubmit="handleSubmit(event)">
         <div class="form-group">
-          <label for="name">Full Name</label>
+          <label for="name">Full Name *</label>
           <input type="text" id="name" name="name" required>
         </div>
 
         <div class="form-group">
-          <label for="email">Email Address</label>
+          <label for="email">Email Address *</label>
           <input type="email" id="email" name="email" required>
         </div>
 
         <div class="form-group">
-          <label for="phone">Phone Number (Optional)</label>
+          <label for="phone">Phone Number</label>
           <input type="tel" id="phone" name="phone">
         </div>
 
         <div class="form-group">
-          <label for="message">Your Inquiry</label>
+          <label for="inquiry-type">Inquiry Type</label>
+          <select id="inquiry-type" name="inquiry-type" style="width: 100%; padding: 15px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem;">
+            <option value="">Select...</option>
+            <option value="purchase">Purchase Inquiry</option>
+            <option value="viewing">Private Viewing Request</option>
+            <option value="information">Additional Information</option>
+            <option value="shipping">Shipping & Delivery</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Your Message *</label>
           <textarea id="message" name="message" rows="5" 
-                    placeholder="Please share your interest in 'La Piedad' and any questions you may have about the artwork, pricing, or acquisition process." required></textarea>
+                    placeholder="Please share your interest in 'La Piedad' and any questions about the artwork, viewing, payment options, or shipping." required></textarea>
         </div>
 
         <div style="text-align: center;">
@@ -508,6 +697,63 @@
     
     <p class="footer-text">AD DEI GLORIAM</p>
   </section>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
+  <script>
+    function openLightbox(imageId) {
+      const img = document.getElementById(imageId);
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.style.display = 'flex';
+      
+      // Prevent body scroll
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      const lightbox = document.getElementById('lightbox');
+      lightbox.style.display = 'none';
+      
+      // Restore body scroll
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close lightbox with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeLightbox();
+      }
+    });
+
+    function handleSubmit(event) {
+      event.preventDefault();
+      
+      // Get form data
+      const formData = new FormData(event.target);
+      const data = Object.fromEntries(formData);
+      
+      // Simple validation
+      if (!data.name || !data.email || !data.message) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+      
+      // Here you would typically send the data to a server
+      // For now, we'll just show a success message
+      alert('Thank you for your inquiry! We will respond within 24 hours to discuss "La Piedad" with you.');
+      
+      // Reset form
+      event.target.reset();
+    }
+  </script>
 
 </body>
 </html>
