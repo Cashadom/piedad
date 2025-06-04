@@ -320,57 +320,6 @@
       color: #2c2c2c;
     }
 
-    .contact-form {
-      max-width: 600px;
-      margin: 40px auto 0;
-      text-align: left;
-    }
-
-    .form-group {
-      margin-bottom: 25px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      color: #2c2c2c;
-    }
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      padding: 15px;
-      border: 2px solid #e0e0e0;
-      border-radius: 8px;
-      font-size: 1rem;
-      transition: border-color 0.3s ease;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: #d4af37;
-    }
-
-    .submit-btn {
-      background: linear-gradient(45deg, #2c2c2c, #4a4a4a);
-      color: white;
-      padding: 15px 40px;
-      border: none;
-      border-radius: 50px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      letter-spacing: 1px;
-    }
-
-    .submit-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(44,44,44,0.3);
-    }
-
     .footer-text {
       margin-top: 40px;
       font-style: italic;
@@ -655,52 +604,16 @@
       Begin your collection of contemporary sacred art with this powerful and moving work.
     </p>
 
-    <div class="contact-form">
-      <form onsubmit="handleSubmit(event)">
-        <div class="form-group">
-          <label for="name">Full Name *</label>
-          <input type="text" id="name" name="name" required>
-        </div>
-
-        <div class="form-group">
-          <label for="email">Email Address *</label>
-          <input type="email" id="email" name="email" required>
-        </div>
-
-        <div class="form-group">
-          <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" name="phone">
-        </div>
-
-        <div class="form-group">
-          <label for="inquiry-type">Inquiry Type</label>
-          <select id="inquiry-type" name="inquiry-type" style="width: 100%; padding: 15px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem;">
-            <option value="">Select...</option>
-            <option value="purchase">Purchase Inquiry</option>
-            <option value="viewing">Private Viewing Request</option>
-            <option value="information">Additional Information</option>
-            <option value="shipping">Shipping & Delivery</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="message">Your Message *</label>
-          <textarea id="message" name="message" rows="5" 
-                    placeholder="Please share your interest in 'La Piedad' and any questions about the artwork, viewing, payment options, or shipping." required></textarea>
-        </div>
-
-        <div style="text-align: center;">
-          <button type="submit" class="submit-btn">Send Inquiry</button>
-        </div>
-      </form>
-    </div>
+    <!-- Formulaire Powr remplaçant l'ancien formulaire -->
+    <div class="powr-form-builder" id="0be3097a_1675144946"></div>
+    <script src="https://www.powr.io/powr.js?platform=html"></script>
+    
     
     <p class="footer-text">AD DEI GLORIAM</p>
   </section>
   <footer style="text-align: center; padding: 40px; color: #888;">
-  <a href="terms.html">Terms of use</a>
-</footer>
-
+    <a href="terms.html">Terms of use</a>
+  </footer>
 
   <!-- Lightbox -->
   <div id="lightbox" class="lightbox" onclick="closeLightbox()">
@@ -736,27 +649,6 @@
         closeLightbox();
       }
     });
-
-    function handleSubmit(event) {
-      event.preventDefault();
-      
-      // Get form data
-      const formData = new FormData(event.target);
-      const data = Object.fromEntries(formData);
-      
-      // Simple validation
-      if (!data.name || !data.email || !data.message) {
-        alert('Please fill in all required fields.');
-        return;
-      }
-      
-      // Here you would typically send the data to a server
-      // For now, we'll just show a success message
-      alert('Thank you for your inquiry! We will respond within 24 hours to discuss "La Piedad" with you.');
-      
-      // Reset form
-      event.target.reset();
-    }
   </script>
 
 </body>
