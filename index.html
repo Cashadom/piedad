@@ -216,6 +216,55 @@
       line-height: 1.8;
     }
 
+    .exhibitions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      max-width: 800px;
+      margin: 30px auto 0;
+    }
+
+    .exhibition-card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      text-align: left;
+      transition: transform 0.3s ease;
+    }
+
+    .exhibition-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .exhibition-year {
+      font-size: 0.85rem;
+      color: #d4af37;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .exhibition-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .exhibition-location {
+      font-size: 0.8rem;
+      color: #666;
+      line-height: 1.4;
+    }
+
+    .exhibition-type {
+      display: inline-block;
+      font-size: 0.7rem;
+      background: #f0f0f0;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-top: 8px;
+    }
+
     .inspiration-section {
       background: linear-gradient(135deg, #2c2c2c, #4a4a4a);
       color: white;
@@ -450,6 +499,10 @@
         gap: 20px;
       }
 
+      .exhibitions-grid {
+        grid-template-columns: 1fr;
+      }
+
       .price-display {
         font-size: 2.5rem;
       }
@@ -551,6 +604,44 @@
           traditional religious iconography while bringing fresh perspective through bold color palettes and 
           dynamic brushwork that speaks to today's collectors and art enthusiasts.</p>
         </div>
+
+        <!-- Exhibitions Section -->
+        <div style="margin-top: 50px;">
+          <h4 style="font-size: 1.3rem; color: #555; margin-bottom: 25px; text-align: center;">Recent Exhibitions</h4>
+          <div class="exhibitions-grid">
+            <div class="exhibition-card">
+              <div class="exhibition-year">2022</div>
+              <div class="exhibition-title">Flamboyants</div>
+              <div class="exhibition-location">Chapelle Saint Sulpice, Istres</div>
+              <div class="exhibition-location">June 1-22, 2022</div>
+              <div class="exhibition-type">Group Exhibition</div>
+            </div>
+            
+            <div class="exhibition-card">
+              <div class="exhibition-year">2023</div>
+              <div class="exhibition-title">Peintures Taurines, équestres...</div>
+              <div class="exhibition-location">Espace Astarac, Seissan</div>
+              <div class="exhibition-location">Sept 1 - Oct 30, 2023</div>
+              <div class="exhibition-type">Solo Exhibition</div>
+            </div>
+            
+            <div class="exhibition-card">
+              <div class="exhibition-year">2024</div>
+              <div class="exhibition-title">Encierro Pictórico</div>
+              <div class="exhibition-location">Chapelle Saint Sulpice, Istres</div>
+              <div class="exhibition-location">June 5-30, 2024</div>
+              <div class="exhibition-type">Solo Exhibition</div>
+            </div>
+            
+            <div class="exhibition-card">
+              <div class="exhibition-year">2025</div>
+              <div class="exhibition-title">Expo Art Taurin</div>
+              <div class="exhibition-location">Salle Jean Jaurès, Fourques</div>
+              <div class="exhibition-location">April 11-13, 2025</div>
+              <div class="exhibition-type">Solo Exhibition</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -606,7 +697,6 @@
 
     <!-- Formulaire Powr remplaçant l'ancien formulaire -->
     <div class="powr-form-builder" id="0be3097a_1675144946"></div><script src="https://www.powr.io/powr.js?platform=html"></script>
-    
     
     <p class="footer-text">AD DEI GLORIAM</p>
   </section>
